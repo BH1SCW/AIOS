@@ -210,3 +210,4 @@ aios/config/config.yaml
 
 # ignore cerebrum
 Cerebrum/*
+root

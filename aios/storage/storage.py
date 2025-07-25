@@ -19,7 +19,7 @@ class StorageManager:
         
     def address_request(self, agent_request):
         result = self.filesystem.address_request(agent_request)
-        if isinstance(result, dict):
+        if isinstance(result, (dict, list)):
             result_str = json.dumps(result)
         else:
             result_str = result

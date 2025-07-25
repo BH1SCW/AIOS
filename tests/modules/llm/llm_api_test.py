@@ -75,8 +75,10 @@ def test_sto_retrieve_with_multi_cases():
 
     for case in test_cases:
         print(f"Input: {case['query_text']}\n")
-        with pytest.raises(TypeError):
-            test_sto_retrieve(case)
+        result = test_sto_retrieve(case)
+        assert result is not None, "test_sto_retrieve returned None"
+        assert "response" in result, "No 'response' in result"
+        assert result["response"].get("error") is None
 
 if __name__ == "__main__":
     # agent = TestAgent("test_agent", "What is the capital of France?")
