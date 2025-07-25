@@ -4,6 +4,7 @@ LLM used for evaluation: qwen2.5:7b
 """
 import pytest
 from cerebrum.test_apis import test_single_llm_chat, test_multi_llm_chat, test_llm_call_tool, test_sto_retrieve
+from cerebrum.storage.apis import retrieve_file
 
 # To test llm_chat in more angle, we used GPT-4o to generate   
 def test_single_llm_chat_with_multi_cases():
@@ -19,8 +20,10 @@ def test_single_llm_chat_with_multi_cases():
 
     for case in test_cases:
         print(f"Input: {case['content']}\n")
-        with pytest.raises(TypeError):
-            test_single_llm_chat([case])
+        result = test_single_llm_chat([case])
+        assert result is not None, "test_single_llm_chat returned None"
+        assert "response" in result, "No 'response' in result"
+        assert result["response"].get("error") is None
 
 def test_multi_llm_chat_with_multi_cases():
     test_cases = [
@@ -35,8 +38,10 @@ def test_multi_llm_chat_with_multi_cases():
 
     for case in test_cases:
         print(f"Input: {case['content']}\n")
-        with pytest.raises(TypeError):
-            test_multi_llm_chat([case])
+        result = test_multi_llm_chat([case])
+        assert result is not None, "test_multi_llm_chat returned None"
+        assert "response" in result, "No 'response' in result"
+        # 你可以根据实际需求断言 error 或 response_message
 
 def test_call_tool_with_multi_cases():
     test_cases = [

@@ -41,11 +41,12 @@ llms:
     #   backend: "anthropic"
 
     # Ollama Models
-    - name: "qwen3:1.7b"
+    # - name: "qwen3:1.7b"
+    - name: "qwen2.5:7b"
       backend: "ollama"
       hostname: "http://localhost:11434" # Make sure to run ollama server
 
-    - name: "qwen3:4b"
+    - name: "deepseek-r1:14b"
       backend: "ollama"
       hostname: "http://localhost:11434" # Make sure to run ollama server
 
@@ -88,5 +89,5 @@ agent_factory:
   max_workers: 64  
   
 server:
-  host: "localhost"
+  host: "0.0.0.0"
   port: 8000
